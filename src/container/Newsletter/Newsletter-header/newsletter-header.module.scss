@@ -1,0 +1,37 @@
+.header {
+    background: #020809;
+    color: #fdfdfd;
+    height: 550px;
+}
+
+.imageWrapper {
+    background: url("../../../assets/newsletter-img1.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 400px;
+    min-height: 350px;
+    color: #fff;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding: 20px;
+}
+.imageWrapper2 {
+    background: url("../../../assets/newsletter-img3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px;
+    min-height: 250px;
+    color: #fff;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.TopHeaderNewsBeneth {
+}
