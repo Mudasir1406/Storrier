@@ -5,3 +5,4 @@ export { default as AboutUs } from "./AboutUs";
 export { default as History } from "./History.jsx";
 export { default as UserProfile } from "./UserProfile.jsx";
 export { default as NewsLetter } from "./Newsletter.jsx";
+export { default as GraphComponent } from "./Graph.jsx";

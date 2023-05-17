@@ -3,9 +3,9 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 
-const SearchBar = () => {
+const SearchBar = ({ onChange }) => {
   return (
-    <Stack spacing={3} sx={{ width: 600, margin: 5 }} fullWidth={true}>
+    <Stack spacing={3} sx={{ width: 600, margin: 5 }} fullwidth="true">
       <Autocomplete
         freeSolo
         id="free-solo-2-demo"
@@ -15,6 +15,7 @@ const SearchBar = () => {
           <TextField
             variant="filled"
             {...params}
+            onChange={onChange}
             label="Search Trends"
             InputProps={{
               ...params.InputProps,

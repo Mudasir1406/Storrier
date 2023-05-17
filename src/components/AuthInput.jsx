@@ -8,7 +8,7 @@ const AuthInput = ({ label, onChange }) => {
       type="search"
       variant="standard"
       sx={{ margin: 2 }}
-      fullWidth={true}
+      fullwidth="true"
       onChange={onChange}
     />
   );

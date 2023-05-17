@@ -55,17 +55,38 @@ const SearchHistoryPage = () => {
   return (
     <Box sx={{ p: 2 }}>
       <Box
-        sx={{ display: "flex", alignItems: "center", justifyContent: 'space-between', flexDirection: "row" }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexDirection: "row",
+        }}
       >
-        <Box style={{ minWidth: 40 }} sx={{ mr: 2, margin: 3, marginBottom: '10px' }}>
+        <Box
+          style={{ minWidth: 40 }}
+          sx={{ mr: 2, margin: 3, marginBottom: "10px" }}
+        >
           <Typography
             variant="h5"
-            sx={{ mr: 2, display: "flex", alignSelf: "flex-start", margin: 3, marginBottom: '10px' }}
+            sx={{
+              mr: 2,
+              display: "flex",
+              alignSelf: "flex-start",
+              margin: 3,
+              marginBottom: "10px",
+            }}
           >
             History
           </Typography>
-          <FormControl sx={{ mr: 2, margin: 3, marginTop: '0' }} fullWidth variant="standard" className="custom_select_box">
-            <Typography sx={{ color: 'grey', fontSize: '13px' }}>Show</Typography>
+          <FormControl
+            sx={{ mr: 2, margin: 3, marginTop: "0" }}
+            fullwidth="true"
+            variant="standard"
+            className="custom_select_box"
+          >
+            <Typography sx={{ color: "grey", fontSize: "13px" }}>
+              Show
+            </Typography>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -75,7 +96,7 @@ const SearchHistoryPage = () => {
                 border: "none !important",
               }}
               IconComponent={() => (
-                <RxCaretSort style={{ width: '25px', height: '25px' }} />
+                <RxCaretSort style={{ width: "25px", height: "25px" }} />
               )}
               className="sort_list carListingSort"
             >
@@ -83,16 +104,20 @@ const SearchHistoryPage = () => {
               <MenuItem value="25">25</MenuItem>
               <MenuItem value="50">50</MenuItem>
             </Select>
-            <Typography sx={{ color: 'grey', fontSize: '13px' }}>entries</Typography>
+            <Typography sx={{ color: "grey", fontSize: "13px" }}>
+              entries
+            </Typography>
           </FormControl>
         </Box>
         <Box
-          sx={{ display: "flex", alignItems: "flex-end", flexDirection: "column", margin: 3, }}
+          sx={{
+            display: "flex",
+            alignItems: "flex-end",
+            flexDirection: "column",
+            margin: 3,
+          }}
         >
-          <Typography
-            variant="p"
-            sx={{ mr: 2, textAlign: 'right' }}
-          >
+          <Typography variant="p" sx={{ mr: 2, textAlign: "right" }}>
             Search
           </Typography>
           <TextField
@@ -104,7 +129,7 @@ const SearchHistoryPage = () => {
               width: "100%",
               display: "flex",
               alignSelf: "flex-start",
-              marginTop: '10px'
+              marginTop: "10px",
             }}
           />
         </Box>

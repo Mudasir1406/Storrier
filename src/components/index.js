@@ -5,3 +5,6 @@ export { default as TimelineCard } from "./TimelineCard";
 export { default as SearchBar } from "./SearchBar";
 export { default as InfoCard } from "./InfoCard";
 export { default as Table } from "./Table.jsx";
+export { default as TextUpdaterNode } from "./TextUpdaterNode.js";
+export { default as TweetSummary } from "./TweetSummary.jsx";
+export { default as TweetComponent } from "./TweetComponent.jsx";

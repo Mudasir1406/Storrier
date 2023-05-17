@@ -8,9 +8,17 @@ import {
 import { Box } from "@mui/system";
 import React from "react";
 
-const TimelineCard = ({ heading, description, userName, date, alignSelf }) => {
+const TimelineCard = ({
+  heading,
+  description,
+  userName,
+  date,
+  alignSelf,
+  onClick,
+}) => {
   return (
     <Card
+      onClick={onClick}
       sx={{
         marginY: 3,
         marginX: 3,
