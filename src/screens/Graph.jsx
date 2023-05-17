@@ -5,15 +5,27 @@ import ReactFlow, {
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
+  useReactFlow,
+  useNodesState,
+  useEdgesState,
 } from "reactflow";
 import "reactflow/dist/style.css";
-
+import { shallow } from "zustand/shallow";
+import useStore from "../store";
 import { TextUpdaterNode, TweetComponent } from "../components";
 import { useLocation } from "react-router-dom";
 import "./text-updater-node.css";
 import axios from "axios";
 import TweetUpdater from "../components/TweetUpdater";
 
+const selector = (state) => ({
+  nodes: state.nodes,
+  edges: state.edges,
+  onNodesChange: state.onNodesChange,
+  onEdgesChange: state.onEdgesChange,
+  onConnect: state.onConnect,
+  setNodes: state.setNodes,
+});
 const rfStyle = {
   backgroundColor: "#fff",
   width: "100%",
@@ -53,9 +65,6 @@ const GraphComponent = () => {
       data: { text: "asdasdasdasd" },
     },
   ]);
-
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
   const nodeTypes = useMemo(
     () => ({
       textUpdater: TextUpdaterNode,
@@ -63,18 +72,9 @@ const GraphComponent = () => {
     }),
     []
   );
-  const onNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    [setNodes]
-  );
-  const onEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    [setEdges]
-  );
-  const onConnect = useCallback(
-    (connection) => setEdges((eds) => addEdge(connection, eds)),
-    [setEdges]
-  );
+
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, setNodes } =
+    useStore(selector, shallow);
   useEffect(() => {
     setLoading(true);
     const data = [];
@@ -87,8 +87,8 @@ const GraphComponent = () => {
             type: "tweetUpdater",
             targetPosition: "top",
             position: {
-              x: Math.floor(Math.random() * 100 * index),
-              y: Math.floor(Math.random() * -100 * index),
+              x: Math.floor(Math.random() * 500 * index),
+              y: Math.floor(Math.random() * -500 * index),
             },
             data: {
               user_image: item?.user_image,
@@ -100,7 +100,10 @@ const GraphComponent = () => {
           });
         });
       })
-      .then(() => setNodes([...initialNodes, ...data]))
+      .then(() => {
+        console.log("data");
+        setNodes(initialNodes);
+      })
       .catch((e) => console.log(e))
       .finally(() => setLoading(false));
   }, []);
@@ -110,7 +113,7 @@ const GraphComponent = () => {
 
   return (
     <>
-      {loading ? null : (
+      {loading || !nodes ? null : (
         <div style={{ height: window.innerHeight, width: window.innerWidth }}>
           <ReactFlow
             nodes={nodes}
@@ -119,6 +122,7 @@ const GraphComponent = () => {
             onConnect={onConnect}
             nodeTypes={nodeTypes}
             fitView
+            onEdgesChange={onEdgesChange}
             style={rfStyle}
           >
             <Background
