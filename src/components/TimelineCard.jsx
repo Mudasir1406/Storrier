@@ -15,6 +15,7 @@ const TimelineCard = ({
   date,
   alignSelf,
   onClick,
+  influence_count,
 }) => {
   return (
     <Card
@@ -24,7 +25,7 @@ const TimelineCard = ({
         marginX: 3,
         display: "flex",
         flexDirection: "row",
-        maxWidth: 750,
+        maxWidth: 650,
         boxShadow: "1px 2px 20px rgba(0,0,0,0.5)",
         alignSelf: alignSelf,
         borderRadius: 3,
@@ -39,7 +40,7 @@ const TimelineCard = ({
           sx={{
             display: "flex",
             flexDirection: "row",
-            width: 350,
+            width: 250,
             resize: "contain",
             margin: 2,
             borderRadius: 2,
@@ -54,7 +55,7 @@ const TimelineCard = ({
               display: "-webkit-box",
               overflow: "hidden",
               WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 2,
+              WebkitLineClamp: 4,
             }}
           >
             {description}
@@ -67,19 +68,11 @@ const TimelineCard = ({
               borderRadius: 3,
             }}
           >
-            <img
-              src={require("../assets/profile.png")}
-              alt=""
-              style={{
-                width: 50,
-                height: 50,
-                resize: "contain",
-                borderRadius: 10,
-              }}
-            />
             <Box sx={{ marginX: 2 }}>
-              <Typography variant="h6">{userName}</Typography>
-              <Typography variant="body2">{date}</Typography>
+              <Typography variant="body2">Date: {date}</Typography>
+              <Typography variant="body2">
+                Influence Count: {influence_count}
+              </Typography>
             </Box>
           </Box>
         </CardContent>

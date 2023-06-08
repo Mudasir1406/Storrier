@@ -1,27 +1,50 @@
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SearchBar, TimelineCard } from "../components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GRAPH_URL } from "../navigation/PageLinks";
+import { CircularProgress } from "@mui/material";
+
 const Home = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
   const [timelineData, setTimelineData] = useState([]);
   const hangleOnchangeText = (e) => {
     setSearch(e.target.value);
   };
   const handleSubmitSearch = async () => {
+    setLoading(true);
     await axios
-      .post("http://127.0.0.1:443/api/search", {
-        keyword: search,
-      })
+      .post(
+        "http://127.0.0.1:5000/api/search",
+        {
+          keyword: search,
+        },
+        {
+          timeout: 2000000,
+        }
+      )
       .then((res) => {
-        setTimelineData([res.data.Summary_data]);
+        const data = [...timelineData];
+        data.unshift(res.data.Summary_data);
+        setTimelineData(data);
+      })
+      .catch((e) => console.log(e))
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:5000/api/summaries")
+      .then((res) => {
+        console.log(res);
+        setTimelineData(res?.data?.Summary_data?.reverse());
       })
       .catch((e) => console.log(e));
-  };
+  }, []);
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
   return (
     <div>
@@ -39,21 +62,25 @@ const Home = () => {
           sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
         >
           <SearchBar onChange={hangleOnchangeText} search={search} />
-          <Button
-            variant="contained"
-            sx={{ height: 50 }}
-            onClick={handleSubmitSearch}
-          >
-            Search
-          </Button>
+          {loading ? (
+            <CircularProgress />
+          ) : (
+            <Button
+              variant="contained"
+              sx={{ height: 50, borderRadius: 20 }}
+              onClick={handleSubmitSearch}
+            >
+              Search
+            </Button>
+          )}
         </Box>
         <Typography variant="h1">Timeline</Typography>
-        {timelineData.length > 0 ? (
+        {timelineData?.length > 0 ? (
           <>
             <div
               style={{
-                borderLeft: "10px solid black",
-                height: windowSize.current[1] * 3,
+                borderLeft: "10px solid #1976d2",
+                height: windowSize.current[1] * 5,
                 position: "absolute",
                 left: "50%",
                 marginLeft: "-3",
@@ -62,18 +89,19 @@ const Home = () => {
               }}
             ></div>
 
-            {timelineData.map((item, index) => {
+            {timelineData.reverse().map((item, index) => {
               return index % 2 === 0 ? (
                 <TimelineCard
-                  heading={item?.title}
+                  heading={item?.keyword}
                   description={item?.summary}
                   userName="Jon Kantner"
-                  date={item.date.slice(0, 10)}
+                  date={item?.created_at?.slice(0, 10)}
+                  influence_count={item?.influence_count}
                   alignSelf="flex-start"
                   onClick={() => {
                     navigate(GRAPH_URL, {
                       state: {
-                        title: item?.title,
+                        title: item?.keyword,
                         summary: item?.summary,
                       },
                     });
@@ -81,11 +109,20 @@ const Home = () => {
                 />
               ) : (
                 <TimelineCard
-                  heading="12 Mobile UX Design Trends For 2018"
-                  description="Things move quickly in the mobile app universe. To succeed in the field of mobile UX design, designers must have the foresight and prepare for new challenges around the corner"
+                  heading={item?.keyword}
+                  description={item?.summary}
                   userName="Jon Kantner"
-                  date="July 14 , 2022"
+                  date={item?.created_at?.slice(0, 10)}
                   alignSelf="flex-end"
+                  influence_count={item?.influence_count}
+                  onClick={() => {
+                    navigate(GRAPH_URL, {
+                      state: {
+                        title: item?.keyword,
+                        summary: item?.summary,
+                      },
+                    });
+                  }}
                 />
               );
             })}

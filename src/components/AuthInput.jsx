@@ -5,7 +5,7 @@ const AuthInput = ({ label, onChange }) => {
     <TextField
       id="standard-search"
       label={label}
-      type="search"
+      type={label === "Password" ? "password" : "search"}
       variant="standard"
       sx={{ margin: 2 }}
       fullwidth="true"

@@ -60,17 +60,31 @@ export default AboutUs;
 
 const teamMembers = [
   {
-    name: "John Doe",
+    name: "Mudasir Ahmed",
     title: "Software Developer",
-    imageSrc: "https://picsum.photos/400/300",
+    imageSrc: "https://avatars.githubusercontent.com/u/65568013?v=4",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non risus sed dui ullamcorper euismod ac vel mauris. Donec sodales pharetra lorem in placerat. Duis quis magna vitae elit rhoncus tempor.",
   },
   {
-    name: "Jane Doe",
-    title: "Designer",
-    imageSrc: "https://picsum.photos/400/300",
+    name: "Rauf shams malick",
+    title: "Supervisor",
+    imageSrc:
+      "https://khi.nu.edu.pk/wp-content/uploads/2022/02/Dr.-Rauf-Ahmed-Shams-Malik-Assistant-Professor.jpg",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non risus sed dui ullamcorper euismod ac vel mauris. Donec sodales pharetra lorem in placerat. Duis quis magna vitae elit rhoncus tempor.",
+      "A Data Scientist and a data intensive problem slover. Expertise in understanding complex data oriented problems and develoment of business strategies around data. Founder of social media analytics product (InsideTrneds)...",
+  },
+  {
+    name: "USAMA KHAN",
+    title: "Backend Developer",
+    imageSrc: "https://avatars.githubusercontent.com/u/96444294?v=4",
+    description:
+      "I love to create beautiful, engaging, and mobile-friendly  websites and mobile app.Strong engineering professional with a Bachelor of Science - BS focused in Computer Science from National University of Computer and Emerging Sciences.",
+  },
+  {
+    name: "Sayed Hassan Ali",
+    title: "Project Manager",
+    imageSrc: "https://avatars.githubusercontent.com/u/65040329?v=4",
+    description: "Software Engineer | PHP | .Net | C#.",
   },
 ];
